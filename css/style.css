@@ -101,6 +101,7 @@ h1 {
 }
 .lesson-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
   margin-bottom: 10px;
@@ -113,7 +114,7 @@ h1 {
   font-size: 14px;
 }
 .lesson-row .lesson-sum-input {
-  max-width: 70px;
+  max-width: 125px;
   flex: none;
 }
 .lesson-del {
@@ -185,6 +186,7 @@ h1 {
 /* --- Блок детей --- */
 .child-block {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   align-items: center;
   margin-bottom: 10px;
@@ -197,7 +199,7 @@ h1 {
   font-size: 14px;
 }
 .child-block .child-class-input {
-  max-width: 70px;
+  max-width: 125px;
   flex: none;
 }
 .child-del {
