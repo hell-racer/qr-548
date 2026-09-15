@@ -106,8 +106,8 @@
     el.payerDocType.value = d.payer.docType || '';
     el.payerDocNumber.value = d.payer.docNumber || '';
     el.payerInn.value = d.payer.inn || '';
-    el.year.value = d.year || '';
-    el.month.value = d.month || window.paymentStore.currentMonth();
+    el.year.value = window.paymentStore.currentYear() || '';
+    el.month.value = window.paymentStore.currentMonth();
     el.template.value = d.template || (window.APP_SETTINGS.DefaultTemplate || '');
   }
 
