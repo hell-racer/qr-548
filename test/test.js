@@ -96,7 +96,7 @@ tests.forEach(function (t) {
     docNumber: '12 34 567890',
     inn: '773702700000'
   });
-  var ok = a.indexOf('|PayerIdType=Паспорт РФ|PayerIdNum=12 34 567890|PayerINN=773702700000|Purpose=') > 0 &&
+  var ok = a.indexOf('|PayerIdType=Паспорт РФ|PayerIdNum=1234567890|PayerINN=773702700000|Purpose=') > 0 &&
     a.indexOf('ST00012|') === 0 &&
     a.indexOf('CorrespAcc=40102810545370000003|') > 0 &&
     a.indexOf('|CBC=00000000000131131022|OKTMO=0|Sum=150000') > 0;

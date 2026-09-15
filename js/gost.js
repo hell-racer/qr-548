@@ -83,7 +83,7 @@
 
     // Документ плательщика (ДУЛ): вид и номер.
     var docType = (payer.docType || '').trim();
-    var docNumber = (payer.docNumber || '').trim();
+    var docNumber = (payer.docNumber || '').replace(/\s+/g, '');
     if (docType) {
       parts.push('PayerIdType=' + docType);
     }
