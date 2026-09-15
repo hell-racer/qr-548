@@ -33,6 +33,8 @@
     el.resetBtn = $('reset-btn');
     el.error = $('error');
     el.result = $('result');
+    el.requisitesToggleBtn = $('requisites-toggle-btn');
+    el.requisitesDetail = $('requisites-detail');
 
     fillMonthSelect();
 
@@ -63,6 +65,8 @@
     el.addLessonBtn.addEventListener('click', addLesson);
     el.generateBtn.addEventListener('click', generateAll);
     el.resetBtn.addEventListener('click', resetAll);
+
+    el.requisitesToggleBtn.addEventListener('click', toggleRequisites);
 
     // Маска "Номер документа" для паспорта: NN..(4) пробел NNNNNN(6)
     el.payerDocNumber.addEventListener('input', function () {
@@ -398,6 +402,45 @@
     if (!confirm('Сбросить все сохранённые данные?')) return;
     window.paymentStore.clear();
     location.reload();
+  }
+
+  // Показать/скрыть реквизиты получателя (школы) из конфига
+  var REQUISITE_LABELS = [
+    ['Name', 'Наименование'],
+    ['PersonalAcc', 'Расчётный счёт'],
+    ['BankName', 'Банк'],
+    ['BIC', 'БИК'],
+    ['CorrespAcc', 'Корр. счёт'],
+    ['KPP', 'КПП'],
+    ['PayeeINN', 'ИНН получателя'],
+    ['CBC', 'КБК'],
+    ['OKTMO', 'ОКТМО']
+  ];
+
+  function renderRequisitesDetail(visible) {
+    var c = window.SCHOOL_PAYMENT;
+    el.requisitesToggleBtn.textContent = visible ? 'Скрыть' : 'Показать';
+    if (!visible) { el.requisitesDetail.classList.add('hidden'); return; }
+    el.requisitesDetail.innerHTML = '';
+    REQUISITE_LABELS.forEach(function (pair) {
+      var row = document.createElement('div');
+      row.className = 'req-row';
+      var label = document.createElement('span');
+      label.className = 'req-label';
+      label.textContent = pair[1];
+      var value = document.createElement('code');
+      value.textContent = c[pair[0]];
+      row.appendChild(label);
+      row.appendChild(value);
+      el.requisitesDetail.appendChild(row);
+    });
+    el.requisitesDetail.classList.remove('hidden');
+  }
+
+  function toggleRequisites() {
+    var visible = !el.requisitesDetail.classList.contains('hidden') && el.requisitesDetail.childNodes.length > 2;
+    // перерисовываем только при показе, чтобы текст всегда был актуален
+    renderRequisitesDetail(!visible);
   }
 
   document.addEventListener('DOMContentLoaded', init);
